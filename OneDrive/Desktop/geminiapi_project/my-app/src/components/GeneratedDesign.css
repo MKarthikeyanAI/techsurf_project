@@ -1,0 +1,180 @@
+.generated-design-container {
+    margin-top: 20px;
+    background-color: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.design-output {
+    width: 100%; /* Allow the SVG to fill the container width */
+    height: auto; /* Maintain aspect ratio */
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    padding: 10px;
+    border-radius: 6px;
+    overflow: auto; /* Ensure any overflow is handled */
+}
+
+svg {
+    display: block; /* Remove extra space below the SVG */
+    width: 100%; /* Ensure the SVG scales to the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.figma-button ,.code-button{
+  background-color: #0082f0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex; 
+  align-items: center; /* Center the items vertically */
+}
+
+/* Wrapping container for buttons */
+.button-container {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  margin-top: 10px;
+}
+
+/* .figma-button {
+  background-color: #1b36ff;
+  border: 1px solid #ccc;
+}
+
+.code-button {
+  background-color: #123eec;
+  border: 1px solid #ccc;
+} */
+
+.figma-button:hover {
+  background-color: #006bb3;
+}
+.code-button:hover {
+  background-color: #006bb3;
+}
+
+.icon {
+  vertical-align: middle; /* Align the icon with the text */
+}
+
+/* src/components/GeneratedDesign.css */
+
+.loading-animation {
+  font-size: 18px;
+  color: #f1f1f1;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header h4 {
+  margin: 0;
+}
+
+.close-button {
+  background-color: #ff5f5f;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.modal-body {
+  margin-top: 10px;
+}
+
+.code-block {
+  background-color: #272822;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-family: monospace;
+  margin-bottom: 15px;
+}
+
+.copy-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+
+.button-container1 {
+  display: flex; /* Use flexbox to align items in a row */
+  justify-content: space-between; /* Distribute space between buttons */
+  margin-top: 10px; /* Space above the buttons */
+}
+
+.copy-button, .close-button {
+  padding: 10px 15px;
+  margin: 0 5px; /* Add some space between buttons */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.copy-button {
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+}
+
+.close-button {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+}
+
+.copy-button:hover {
+  background-color: #75eb60;
+}
+.close-button:hover {
+  background-color: #b30000;
+}
