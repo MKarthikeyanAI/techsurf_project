@@ -26,6 +26,7 @@ import FigmaPromptForm from "./components/FigmaPromptForm";
 import GeneratedDesign from "./components/GeneratedDesign";
 import "./App.css"; // For overall styling
 
+
 const App = () => {
   
   const [designData, setDesignData] = useState({ svgContent: "", htmlCssCode: "" });
@@ -49,7 +50,6 @@ const App = () => {
       <ComponentGenerator />
       <CreateContentType />
       <ContentTypes />
-
     </div>
   );
 };

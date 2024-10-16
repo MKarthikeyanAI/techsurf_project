@@ -76,13 +76,53 @@
 # src/database.py
 
 from pymongo import MongoClient
-from config import MONGO_URI, DATABASE_NAME
+from pymongo.server_api import ServerApi
+from config import MONGO_URI, DATABASE_NAME, COLLECTION_NAME_TEMPLATES
 
 class Database:
     def __init__(self):
-        self.client = MongoClient(MONGO_URI)
+        self.client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
+        # self.client = MongoClient(MONGO_URI)
         self.db = self.client[DATABASE_NAME]
+
+        # Send a ping to confirm a successful connection
+        try:
+            self.client.admin.command('ping')
+            print("Pinged your deployment. You successfully connected to MongoDB!")
+        except Exception as e:
+            print(f"Failed to connect to MongoDB: {e}")        
 
     def get_collection(self, collection_name):
         return self.db[collection_name]
+    
+
+    # Function to fetch svg_code from the database based on page_type and template_name
+    def fetch_svg_code(self,page_type, template_name):
+
+        print("Page_Type: ",page_type)
+        print("Templage_name: " ,template_name)
+        # Access the collection
+        collection = self.get_collection('svgTemplates')
+
+        # Query to find the document with the specified page_type
+        document = collection.find_one({"page_type": page_type})
+
+        # Check if the document exists
+        if not document:
+            print(f"No document found for page_type: {page_type}")
+            return None
+        
+        temp = document.get("templates")
+        print(temp[0]["name"])
+
+        # Iterate through the templates array to find the matching template name
+        for template in document.get("templates", []):
+            print("Inside for loop")
+            if template['name'] == template_name:
+                print(f"Found SVG Code for {template_name}: {template['svg_code']}")
+                print("for loop reached")
+                return template['svg_code']
+
+        print(f"No SVG code found for template name: {template_name} under page_type: {page_type}.")
+        return None
 

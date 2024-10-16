@@ -1,16 +1,13 @@
 # src/fetch_svg_code.py
 
 from database import Database
-
 # Create a Database instance
 db = Database()
 
 # Function to fetch svg_code
 def fetch_svg_code(page_type, template_name):
-    svg_code = db.fetch_svg_code(page_type, template_name)
-    print("svg_code MK:")
+    svg_code = fetch_svg_code(page_type, template_name)
 
-    
     if svg_code:
         print(f"SVG Code for {template_name}: {svg_code}")
     else:

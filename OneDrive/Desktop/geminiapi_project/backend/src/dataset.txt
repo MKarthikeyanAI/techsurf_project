@@ -71,8 +71,6 @@ easy:
         <text x="150" y="260" fill="#666" font-size="16" font-family="Arial" text-anchor="middle">Short description here</text>
         <text x="150" y="300" fill="#4CAF50" font-size="24" font-family="Arial" text-anchor="middle">$39.99</text>
       </g>
-
-      
     </g>
   </g>
 
