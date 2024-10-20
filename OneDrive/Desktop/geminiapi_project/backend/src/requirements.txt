@@ -4,3 +4,5 @@ python-dotenv
 pymongo
 dnspython
 google-generativeai
+gunicorn
+waitress

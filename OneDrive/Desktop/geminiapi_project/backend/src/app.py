@@ -6,7 +6,6 @@ import google.generativeai as genai
 import os
 import re
 from bson import ObjectId  # Import ObjectId for conversion
-import json
 
 # Load environment variables from .env file
 load_dotenv()
@@ -453,4 +452,7 @@ def get_svg_code():
             return jsonify({"hello": f"No SVG code found for under and no matching components.","response_type":3}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Use Gunicorn in production
+    app.run(host='0.0.0.0', port=8000, debug=False)  # Disable debug mode for production
+
+    
