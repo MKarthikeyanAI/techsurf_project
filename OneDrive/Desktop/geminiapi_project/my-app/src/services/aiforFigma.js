@@ -263,7 +263,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
 // Function to call Flask backend
 const fetchSvgFromBackend = async (prompt) => {
   try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/get-svg-code`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/get-svg-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ const fetchSvgFromBackend = async (prompt) => {
 // Function to call the Flask backend and fetch all page_type:svg_code pairs
 const fetchSvgFromBackendForWebsite = async () => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/get-all-svg-codes`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}get-all-svg-codes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ const fetchSvgFromBackendForWebsite = async () => {
 // Function to call the Flask backend and fetch all page_type:svg_code pairs
 const fetchcontenttypes = async (prompt,designType) => {
 try {
-  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/generate-design`, {
+  const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/generate-design`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
