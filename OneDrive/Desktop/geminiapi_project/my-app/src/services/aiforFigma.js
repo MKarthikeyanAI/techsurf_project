@@ -288,7 +288,7 @@ const fetchSvgFromBackend = async (prompt) => {
 // Function to call the Flask backend and fetch all page_type:svg_code pairs
 const fetchSvgFromBackendForWebsite = async () => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}get-all-svg-codes`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/get-all-svg-codes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
