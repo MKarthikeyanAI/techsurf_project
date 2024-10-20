@@ -1,64 +1,171 @@
+
+
 .design-container {
-    background-color: #2d2d2d;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
+  background-color: #2d2d2d;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Soft shadow */
+  max-width: 450px;
+  margin: 30px auto;
+}
+
+h2 {
+font-size: 22px;
+margin-bottom: 20px;
+color: #fff;
+font-weight: 600;
+}
+
+
+.prompt-form {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.prompt-textarea {
+padding: 12px;
+border-radius: 8px;
+border: 2px solid #606770; /* Border for better input visibility */
+resize: none;
+min-height: 70px;
+background-color: #0f0f0f;
+color: #f1e9e9;
+outline: none;
+font-size: 16px;
+transition: all 0.3s ease-in-out;
+}
+
+.prompt-textarea:focus {
+border-color: #2f2d33; /* Highlight on focus */
+}
   
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  .prompt-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .prompt-textarea {
-    padding: 10px;
-    border-radius: 6px;
-    border: none;
-    resize: none;
-    min-height: 100px;
-    background-color: #3c3c3c;
-    color: #fff;
-    outline: none;
-  }
-  
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .platform-options button {
-    background-color: #3c3c3c;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .platform-options .selected {
-    background-color: #5a5a5a;
-  }
-  
-  .visibility-options select {
-    padding: 10px;
-    background-color: #3c3c3c;
-    color: #fff;
-    border-radius: 6px;
-    border: none;
-  }
-  
-  .generate-button {
-    background-color: #7a42f4;
-    padding: 10px 20px;
-    border-radius: 6px;
-    border: none;
-    color: white;
-    cursor: pointer;
-  }
-  
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.platform-options button {
+  background-color: #3c3c3c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.platform-options .selected {
+  background-color: #5a5a5a;
+}
+
+.visibility-options select {
+  padding: 10px;
+  background-color: #3c3c3c;
+  color: #fff;
+  border-radius: 6px;
+  border: none;
+}
+
+.generate-button {
+  background-color: #11854b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  display: flex; 
+  align-items: center; /* Center the items vertically */
+}
+.generate-button:hover {
+  background-color: #444141;
+}
+.generate-button.loading {
+  background-color: #242424; /* Loading state color */
+}
+
+.generate-button:disabled {
+  background-color: #242424; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+/* Dropdown Styling */
+.design-type-select {
+  appearance: none; /* Remove default dropdown arrow */
+  background-color: #11854b; /* Same background color as the button */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 40px 10px 20px; /* Adjust padding for space for the arrow */
+  font-size: 14px; /* Font size same as the button */
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid #ccc; /* Border similar to the button */
+  outline: none; /* Remove default outline */
+  position: relative; /* For positioning custom arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center; /* Adjust arrow position */
+  background-size: 20px; /* Custom dropdown arrow size */
+}
+
+.design-type-select:hover {
+  background-color: #444141; /* Hover state similar to the button */
+}
+
+.design-type-select:focus {
+  outline: none; /* No default focus outline */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Slight shadow to indicate focus */
+}
+
+/* Disabled state for dropdown */
+.design-type-select:disabled {
+  background-color: #242424; /* Disabled state similar to the button */
+  cursor: not-allowed;
+}
+
+label {
+  background-color: #11854b; /* Same background color as the button */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px 20px; /* Padding similar to the button */
+  font-size: 14px; /* Font size same as the button */
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid #ccc; /* Border similar to the button */
+  outline: none; /* Remove default outline */
+  display: flex;
+  align-items: center;
+}
+
+.button-dropdown-container {
+  display: flex;
+  align-items: center; /* Vertically align both the button and dropdown */
+  gap: 10px; /* Space between the dropdown and button */
+  margin-top: 10px;
+}
+
+
+.header {
+  background: linear-gradient(135deg, #0072ff, #00c6ff); /* Gradient background */
+  color: white; /* White text color */
+  padding: 20px; /* Padding around the header */
+  border-radius: 8px; /* Rounded corners */
+  text-align: center; /* Center-align the text */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  margin-bottom: 30px; /* Space below the header */
+}
+
+.headerprompt1 {
+  font-family: 'Arial', sans-serif; /* Clean font */
+  font-size: 1.8em; /* Larger font size */
+  margin: 0; /* Remove default margin */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+}
+
+

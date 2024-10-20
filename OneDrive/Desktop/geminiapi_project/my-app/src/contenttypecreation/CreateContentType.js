@@ -15,7 +15,6 @@ const CreateContentType = () => {
             console.error('Error during creating content type:', error.message);
         }
     };
-
     return (
         <div>
             <h1>Create Content Type</h1>

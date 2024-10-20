@@ -7,58 +7,35 @@ const createContentType = async (authToken) => {
     const url = 'https://api.contentstack.io/v3/content_types';
 
     const contentTypeData = {
-        "content_type": {
-            "title": "Foodee",
-            "uid": "foodee",
-            "schema": [
-                {
-                    "display_name": "Title",
-                    "uid": "title",
-                    "data_type": "text",
-                    "field_metadata": {
-                        "_default": true
+            "content_type": {
+                "title": "Pagqe",
+                "uid": "pagqe",
+                "schema": [{
+                        "display_name": "Title",
+                        "uid": "title",
+                        "data_type": "text",
+                        "field_metadata": {
+                            "_default": true
+                        },
+                        "unique": false,
+                        "mandatory": true,
+                        "multiple": false
                     },
-                    "unique": false,
-                    "mandatory": true,
-                    "multiple": false
-                },
-                {
-                    "data_type":"json",
-                    "display_name":"JSON RTE",
-                    "uid":"json_rte",
-                    "field_metadata":{
-                      "allow_json_rte":true,
-                      "rich_text_type":"advanced",
-                      "description":"",
-                      "default_value":""
-                    },
-                    "reference_to":[
-                      "character"
-                    ],
-                    "non_localizable":false,
-                    "multiple":false,
-                    "mandatory":false,
-                },                  
-                {
-                    "display_name": "URL",
-                    "uid": "url",
-                    "data_type": "text",
-                    "field_metadata": {
-                        "_default": true
-                    },
-                    "unique": false,
-                    "multiple": false
+                    {
+                        "display_name": "URL",
+                        "uid": "url",
+                        "data_type": "text",
+                        "field_metadata": {
+                            "_default": true
+                        },
+                        "unique": false,
+                        "multiple": false
+                    }
+                ],
+                "options": {
+                    "singleton": true,
+        
                 }
-            ]
-            // "options": {
-            //     "title": "title",
-            //     "publishable": true,
-            //     "is_page": true,
-            //     "singleton": false,
-            //     "sub_title": ["url"],
-            //     "url_pattern": "/:title",
-            //     "url_prefix": "/"
-            // }
         }
     };
 
@@ -70,11 +47,14 @@ const createContentType = async (authToken) => {
                 'Content-Type': 'application/json',
             },
         });
-
+      
         console.log('Content Type Created:', response.data);
-    } catch (error) {
+    } 
+    catch (error) {
+        console.log("ERROR IN CREATING CONTENT TYPE MK");
         console.error('Error creating content type:', error.response ? error.response.data : error.message);
     }
+    console.log("CATCH FINISHED");
 };
 
 // // Main function to execute the login and create content type

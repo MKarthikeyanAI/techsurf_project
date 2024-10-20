@@ -83,7 +83,32 @@ pre {
   min-height: 100vh;
 }
 
+/* Container that holds both the form and sidebar */
 .container {
-  width: 80%;
-  max-width: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1200px;
+}
+/* Main content for FigmaPromptForm */
+.main-content {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.generated-design-sections {
+  margin-top: 20px; /* Space between the form and generated design */
+  background-color: #c0c3c6; /* Light background for contrast */
+  padding: 20px; /* Padding inside the generated design section */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(244, 240, 240, 0.1); /* Slight shadow for depth */
+}
+
+/* For responsive design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column; /* Stack form and sidebar on small screens */
+  }
 }
