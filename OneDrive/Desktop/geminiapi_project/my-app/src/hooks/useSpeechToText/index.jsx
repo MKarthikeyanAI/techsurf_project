@@ -47,7 +47,8 @@ const useSpeechToText = (options) =>{
             recognition.stop()
         }
 
-    },[])
+    }, [options.continuous, options.interimResults, options.lang]);
+
 
     const startListening = () =>{
         if(recognitionRef.current && !isListening)
