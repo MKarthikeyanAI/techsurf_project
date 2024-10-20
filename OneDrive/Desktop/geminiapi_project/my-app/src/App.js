@@ -6,8 +6,8 @@ import React, { useState } from "react";
 // import Button from './components/Button';
 // import ComponentGenerator from './components/ComponentGenerator';
 // import CreateContentType from './CreateContentType';
-import CreateContentType from './contenttypecreation/CreateContentType';
-import ContentTypes from './contenttypecreation/ContentTypes';
+// import CreateContentType from './contenttypecreation/CreateContentType';
+// import ContentTypes from './contenttypecreation/ContentTypes';
 //figma
 import FigmaPromptForm from "./components/FigmaPromptForm";
 import GeneratedDesign from "./components/GeneratedDesign";
@@ -92,8 +92,8 @@ const App = () => {
       </div>
       
       {/* <ComponentGenerator /> */}
-      <CreateContentType />
-      <ContentTypes />
+      {/* <CreateContentType />
+      <ContentTypes /> */}
       
     </div>
   );
