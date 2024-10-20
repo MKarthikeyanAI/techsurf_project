@@ -42,12 +42,12 @@ const App = () => {
           /> */}
 <FigmaPromptForm
         onGenerate={designType === "Page" 
-          ? (svgContent, htmlCssCode, prompt_input,design_type) => {
+          ? (svgContent, htmlCssCode, prompt_input,design_type,content_types) => {
               // If designType is "Page"
               setDesignData({ svgContent, htmlCssCode, prompt_input,design_type }) 
               setContentTypes(content_types);
             } 
-          : (allPageSVGs, allPageHTMLCSS, prompts,design_type) => {
+          : (allPageSVGs, allPageHTMLCSS, prompts,design_type,content_types) => {
               // If designType is not "Page"
               setAllPageData({ allPageSVGs, allPageHTMLCSS, prompts,design_type });
               // Add this line to set the content types after setting all page data

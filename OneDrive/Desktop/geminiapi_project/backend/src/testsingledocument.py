@@ -110,3 +110,5 @@ final_output = [process_content_type(content_type) for content_type in document[
 
 # Print the final result
 print(json.dumps(final_output, indent=4))
+
+

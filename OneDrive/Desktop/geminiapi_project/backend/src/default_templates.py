@@ -19,7 +19,7 @@ def main():
     
     # Define the document structure
     template_document = {
-    "website_type": "Blog Website",
+    "website_type": "General Website",
     "content_types": [
         {
             "name": "Home Page",
@@ -28,63 +28,64 @@ def main():
                 {"field_name": "Hero Image", "type": "file"},
                 {"field_name": "Intro Text", "type": "multi-line text"}
             ],
-            "template_type": "Single",
-            "grouping": "ungroup"
-        },
-        {
-            "name": "Blog Post",
-            "fields": [
-                {"field_name": "Post Title", "type": "text"},
-                {"field_name": "Content", "type": "multi-line text"},
-                {"field_name": "Author", "type": "reference"}, 
-                {"field_name": "Categories", "type": "array"},       
-                {"field_name": "Featured Image", "type": "file"},
-                {"field_name": "Publish Date", "type": "date"}
-            ],
-            "template_type": "Multiple",
-            "grouping": "ungroup"
-        },
-        {
-            "name": "Author",
-            "fields": [
-                {"field_name": "Full Name", "type": "text"},
-                {"field_name": "Bio", "type": "multi-line text"},
-                {"field_name": "Profile Picture", "type": "file"},
-                {"field_name": "Social Links", "type": "array"} 
-            ],
-            "template_type": "Multiple",
-            "grouping": "ungroup"
-        },
-        {
-            "name": "Categories",
-            "fields": [
-                {"field_name": "Category Name", "type": "text"},
-                {"field_name": "Description", "type": "multi-line text"}
-            ],
-            "template_type": "Multiple",
-            "grouping": "ungroup"
-        },
-        {
-            "name": "Tags",
-            "fields": [
-                {"field_name": "Tag Name", "type": "text"}
-            ],
-            "template_type": "Multiple",
+            "template_type": "Single",  # Only one Home Page
             "grouping": "ungroup"
         },
         {
             "name": "About Us",
             "fields": [
-                {"field_name": "Title", "type": "text"},
-                {"field_name": "Content", "type": "multi-line text"},
-                {"field_name": "Team Members", "type": "array"}  
+                {"field_name": "Company Name", "type": "text"},
+                {"field_name": "Description", "type": "multi-line text"},
+                {"field_name": "Mission Statement", "type": "multi-line text"},
+                {"field_name": "Team Photo", "type": "file"}
             ],
-            "template_type": "Single",
+            "template_type": "Single",  # Only one About Us page
+            "grouping": "group"  # Fields are grouped for company info
+        },
+        {
+            "name": "Services/Products",
+            "fields": [
+                {"field_name": "Service/Product Name", "type": "text"},
+                {"field_name": "Description", "type": "multi-line text"},
+                {"field_name": "Price", "type": "number"},
+                {"field_name": "Image", "type": "file"}
+            ],
+            "template_type": "Multiple",  # Multiple services or products
+            "grouping": "group"  # Fields are grouped by service/product details
+        },
+        {
+            "name": "Contact Page",
+            "fields": [
+                {"field_name": "Contact Title", "type": "text"},
+                {"field_name": "Phone Number", "type": "text"},
+                {"field_name": "Email", "type": "text"},
+                {"field_name": "Address", "type": "multi-line text"}
+            ],
+            "template_type": "Single",  # Only one contact page
+            "grouping": "group"  # Group fields for contact info
+        },
+        {
+            "name": "Blog",
+            "fields": [
+                {"field_name": "Post Title", "type": "text"},
+                {"field_name": "Post Content", "type": "multi-line text"},
+                {"field_name": "Author", "type": "text"},
+                {"field_name": "Published Date", "type": "date"}
+            ],
+            "template_type": "Multiple",  # Multiple blog posts
+            "grouping": "ungroup"
+        },
+        {
+            "name": "Privacy Policy/Terms and Conditions",
+            "fields": [
+                {"field_name": "Title", "type": "text"},
+                {"field_name": "Content", "type": "multi-line text"}
+            ],
+            "template_type": "Single",  # Only one Privacy Policy/Terms page
             "grouping": "ungroup"
         }
     ]
 }
-
     # Insert the document
     inserter.insert_template(template_document)
 

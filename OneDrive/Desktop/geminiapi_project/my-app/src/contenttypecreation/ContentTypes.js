@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import loginToContentstack from './loginToContentstack';
+import loginToContentstack from '../components/loginToContentstack';
 
 const ContentTypes = () => {
     const [contentTypes, setContentTypes] = useState([]);

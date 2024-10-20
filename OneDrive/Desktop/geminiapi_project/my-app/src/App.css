@@ -76,10 +76,12 @@ pre {
 
 /* //final */
 
+
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right:170px;
   min-height: 100vh;
 }
 
@@ -88,7 +90,7 @@ pre {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch; /* Ensure items stretch to fill the container height */
   width: 90%;
   max-width: 1200px;
 }
@@ -111,4 +113,8 @@ pre {
   .container {
     flex-direction: column; /* Stack form and sidebar on small screens */
   }
+  .right-sidebar {
+    width: 100%; /* Full width on small screens */
+  }
 }
+

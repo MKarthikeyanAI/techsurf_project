@@ -8,8 +8,6 @@ import re
 from bson import ObjectId  # Import ObjectId for conversion
 import json
 
-
-
 # Load environment variables from .env file
 load_dotenv()
 # Configure Google Generative AI
@@ -129,11 +127,13 @@ def match_website_type(prompt):
 
         {prompt}
 
-        For the above prompt what is the website_type from the WEBSITE_TYPES Array.Tell me in a single word(array element) if it matches any Website types in my array(Website_types) if nothing is matched tell me in a single word generic_website
+        For the above prompt which website_type is related to it.Tell me in a single word(array element) if it matches any Website types in my array(Website_types) if nothing is matched tell me in a single word generic_website
 
         I need output in single word only"""
+
         # Generate response based on the prompt
         response = model.generate_content(f"{test_prompt}")
+        print("Response GEMINI WEBSITE TYPE: ",response)
         website_type = response.text.strip()  # Get the generated content
 
         result = {'website_type': website_type or 'generic_website'}  # Return generated website type or 'generic_website'
@@ -343,6 +343,9 @@ def generate_design():
         
         print("Matched Website Type: ", matched_website_type)
 
+        if(matched_website_type == "generic_website"):
+            matched_website_type = "General Website"
+
         # Step 3: Query the MongoDB using the Database class for the matched website_type
         document = db.fetch_document_by_website_type(matched_website_type)
 
@@ -357,7 +360,9 @@ def generate_design():
             return jsonify({"content_types": final_output})
 
         else:
+
             print(f"No document found for website type: {match_website_type}")
+
 
         
 

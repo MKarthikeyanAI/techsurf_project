@@ -1,6 +1,6 @@
 import React from 'react';
-import createContentType from './ContentTypeService';
-import loginToContentstack from './loginToContentstack';
+import createContentType from '../components/ContentTypeService';
+import loginToContentstack from '../components/loginToContentstack';
 const CreateContentType = () => {
     const handleCreateContentType = async () => {
         // createContentType();
