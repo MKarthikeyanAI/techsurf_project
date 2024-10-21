@@ -4,7 +4,7 @@ const tokenUrl = 'https://eu-app.contentstack.com/apps-api/apps/token';
 // Redirect to Contentstack OAuth login page
 export function redirectToContentstackOAuth(regionUrl) {
   const clientId = "u7ZmYJM3vkCrEQru";
-  const redirectUri = "https://www.google.com/";
+  const redirectUri = "https://techsurf-project-1.onrender.com/";
   const appUID = "6714a525e15a8400128d6781";
   const scope = 'cm.content-types.management:write cm.stacks.management:read organizations:read';
   console.log(regionUrl);
