@@ -181,7 +181,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
   }
   else{    
     // Step 1: Call the backend to get SVG codes for multiple pages
-    const websitedata = await fetchSvgFromBackendForWebsite();
+    const websitedata = await fetchSvgFromBackendForWebsite(prompt);
     console.log("Website Data: ", websitedata);
     
     const allPageSVGs = []; // Array to store SVG codes for all pages
@@ -288,15 +288,16 @@ const fetchSvgFromBackend = async (prompt) => {
 };
 
 // Function to call the Flask backend and fetch all page_type:svg_code pairs
-const fetchSvgFromBackendForWebsite = async () => {
+const fetchSvgFromBackendForWebsite = async (prompt) => {
   try {
     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}api/get-all-svg-codes`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt })
     });
-
+    
     const data = await response.json();
     console.log("All SVG codes retrieved from MongoDB:", data);
 
