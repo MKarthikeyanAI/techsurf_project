@@ -269,8 +269,7 @@ const fetchSvgFromBackend = async (prompt) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt }),
-        credentials: 'include', // Include credentials like cookies, if needed
+        body: JSON.stringify({ prompt })
       });
       
       const data = await response.json();
