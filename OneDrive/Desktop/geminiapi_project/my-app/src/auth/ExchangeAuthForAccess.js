@@ -12,7 +12,7 @@ export async function exchangeAuthorizationCodeForToken(code, region) {
   qs.append('grant_type', 'authorization_code');
   qs.append('client_id', 'u7ZmYJM3vkCrEQru');   // Stored in .env
   qs.append('client_secret', 'PbKOTCy5MsgM7Jdm1r1uqgZLu415HFcb'); // Stored in .env
-  qs.append('redirect_uri', "https://techsurf-project.onrender.com"); // Same as used in your curl
+  qs.append('redirect_uri', "https://techsurf-project.onrender.com/"); // Same as used in your curl
   qs.append('code', code);  // Authorization code
 
   // console.log("after parsing data");
