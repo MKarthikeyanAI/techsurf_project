@@ -8,6 +8,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+  console.log("Before content_types running...");
   const content_types = await fetchcontenttypes(prompt,designType);
 
   console.log("Content_Data in aiforFigma.js file:",content_types)
@@ -276,6 +277,7 @@ const fetchSvgFromBackend = async (prompt) => {
       if (response.ok) {
         return data;
       } else {
+        console.log("Error in getting SVG CODE");
         console.error("Error fetching SVG code:", data.error);
         return null;
       }
@@ -305,6 +307,7 @@ const fetchSvgFromBackendForWebsite = async () => {
       return null;
     }
   } catch (error) {
+    console.log("Error in getting all website svg code");
     console.error("Error communicating with the backend:", error);
     return null;
   }
@@ -320,16 +323,23 @@ try {
     },
     body: JSON.stringify({ prompt, designType })
   });
+  
   const data = await response.json();
+  console.log("Fetched the Matched content type: ",data);
 
   if (!response.ok) {
-    throw new Error(data.message || 'Something went wrong');
+    console.log("fetched the matched content tye: ",data);
+    return null;
+    // throw new Error(data.message || 'Something went wrong');
   }
   return data.content_types;
 } catch (err) {
+  console.log("Error in fetch content types");
   console.error("Error in generateFigmaDesignPrompt:", err);
-  throw err;
+  return null;
+  // throw err;
 }
+
 };
 
 //Only prompt based code:
