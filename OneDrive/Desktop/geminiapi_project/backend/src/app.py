@@ -29,9 +29,6 @@ else:
 # Initialize the Database instance
 db = Database()
 
-
-
-
 def match_website_type(prompt):
     
     if re.search(r'(job\s*portal|portal\s*job)(\s*website)?', prompt, re.IGNORECASE):
@@ -341,7 +338,7 @@ def generate_design():
     if request.method == 'OPTIONS':
         return jsonify({'status': 'OK'}), 200
     
-    
+
     data = request.get_json()
 
     prompt = data.get('prompt')
@@ -387,31 +384,76 @@ def generate_design():
         print(f"Error: {e}")
         return jsonify({"message": "Server error"}), 500
     
-
 # Route to get all SVG codes from the websites collection
-@app.route('/api/get-all-svg-codes', methods=['GET'])
+@app.route('/api/get-all-svg-codes', methods=['POST'])
 def get_all_svg_codes():
-    print("Fetching all SVG codes from the websites collection")
+
+    data = request.get_json()
+    print(f"Received data: {data}")  # Add logging to check input
+
+    # Extract the prompt from the request
+    prompt = data.get('prompt')
     
-    # Fetch the 'websites' collection from the database
+    if not prompt:
+        return jsonify({"message": "No prompt provided"}), 400
+    
+    # Step 2: Match extracted keywords to a predefined website type
+    matched_website_type = match_website_type(prompt)
+    
+    print("Matched Website Type: ", matched_website_type)
+
+   # Predefined mapping of website types to their respective page types
+    website_page_mapping = {
+        "Wedding Website": ["home page", "contact us page", "gallery page", "event details page"],
+        "Job Portal Website": ["home page", "job listings", "about us page", "contact us page"],
+        "E-commerce Website": ["home page", "gallery page", "checkout page", "FAQ page"],
+        "Portfolio Website": ["home page", "projects page", "about us page", "contact us page"],
+        "Corporate Website": ["home page", "services page", "about us page", "contact us page","careers page"],
+        "News Website": ["home page", "latest news", "about us page", "contact us page"],
+        "Educational Website": ["home page", "courses page", "about us page", "contact us page"],
+        "Non-profit Website": ["home page", "about us page", "donate page", "contact us page"],
+        "Real Estate Website": ["home page", "property listing", "agents", "about us page", "contact us page"],
+        "Event Website": ["home page", "gallery page", "about us page", "contact us page"],
+        "Personal Blog/Website": ["home page", "blog posts", "about us page", "contact us page"],
+        "Restaurant Website": ["home page", "menu page", "about us page", "contact us page","gallery page"],
+        "Photography Website": ["home page", "gallery page", "about us page", "contact us page"],
+        "Healthcare Website": ["home page", "services page", "about us page", "contact us page"],
+        "Fitness/Gym Website": ["home page", "membership","trainers", "about us page", "contact us page"],
+        "Music Website": ["home page", "gallery page", "about us page", "contact us page"],
+        "Fashion Website": ["home page", "categories", "gallery page", "contact us page"],
+        "Blog Website": ["home page", "blog posts", "about us page", "contact us page"],
+        "Technology/Product Website": ["home page", "gallery page", "about us page", "contact us page"],
+        "Personal Website": ["home page", "about us page", "contact us page", "blog posts"],
+    }
+
+    # Determine the pages to fetch based on the matched website type
+    if matched_website_type in website_page_mapping:
+        page_types_to_fetch = website_page_mapping[matched_website_type]
+    else:
+        # Default page types if no match is found
+        page_types_to_fetch = ["home page", "about page", "contact page"]
+    
+
+    
+    #Fetch the 'websites' collection from the database
     websites_collection = db.get_collection('websites')
-    
-    # Fetch all documents from the collection
-    websites = websites_collection.find()  # This returns a cursor
-    
+
+    # Fetch documents based on the specified page types
+    websites = websites_collection.find({"page": {"$in": page_types_to_fetch}})  # Filter by page types
+
     # Create a dictionary to hold page_type and svg_code pairs
     all_svg_codes = {}
-    
+
     # Iterate through each document and collect the page_type and svg_code
     for website in websites:
         page_type = website.get('page')
         svg_code = website.get('svg code')
-        
+
         if page_type and svg_code:
             print("all page type loop")
             all_svg_codes[page_type] = svg_code
-    
-    print(({"svgs_codes": all_svg_codes}))
+
+    print({"svg_codes": all_svg_codes})
 
     # Return the dictionary of all page_type: svg_code pairs
     return jsonify({"svg_codes": all_svg_codes}), 200
@@ -469,5 +511,6 @@ def get_svg_code():
 if __name__ == '__main__':
     # Use Gunicorn in production
     app.run(host='0.0.0.0', port=8000, debug=False)  # Disable debug mode for production
+    # app.run(debug=True)
 
     
