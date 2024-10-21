@@ -10,6 +10,8 @@ const ContentTypeCard = ({ contentType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [regionUrl, setRegionUrl] = useState(''); // State to hold the selected region URL
 
+  console.log(regionUrl);
+
   const handleCreateClick = async () => {
     try {
       // Check if user is authenticated

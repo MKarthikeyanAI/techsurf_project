@@ -10,9 +10,9 @@ export async function exchangeAuthorizationCodeForToken(code, region) {
 
   const qs = new URLSearchParams();
   qs.append('grant_type', 'authorization_code');
-  qs.append('client_id', 'u7ZmYJM3vkCrEQru');   // Stored in .env
-  qs.append('client_secret', 'PbKOTCy5MsgM7Jdm1r1uqgZLu415HFcb'); // Stored in .env
-  qs.append('redirect_uri', "https://techsurf-project.onrender.com/"); // Same as used in your curl
+  qs.append('client_id', process.env.REACT_APP_CONTENTSTACK_CLIENT_ID); // Use REACT_APP_ prefix
+  qs.append('client_secret', process.env.REACT_APP_CONTENTSTACK_CLIENT_SECRET); // Use REACT_APP_ prefix
+  qs.append('redirect_uri', process.env.REACT_APP_CONTENTSTACK_REDIRECT_URI); // Use REACT_APP_ prefix
   qs.append('code', code);  // Authorization code
 
   // console.log("after parsing data");
