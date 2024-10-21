@@ -321,7 +321,8 @@ try {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ prompt, designType })
+    body: JSON.stringify({ prompt, designType }),
+    credentials: 'include'
   });
   
   const data = await response.json();
