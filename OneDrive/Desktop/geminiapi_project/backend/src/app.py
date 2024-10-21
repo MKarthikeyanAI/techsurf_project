@@ -21,10 +21,10 @@ is_production = os.getenv('FLASK_ENV') == 'production'
 
 if is_production:
     # Restrict CORS in production
-    cors = CORS(app, resources={r"/*": {"origins": ["https://techsurf-project.onrender.com"]}})
+    cors = CORS(app, resources={r"/*": {"origins": ["https://techsurf-project.onrender.com"]}},supports_credentials=True)
 else:
     # Allow CORS for all origins during development
-    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+    cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Initialize the Database instance
 db = Database()
@@ -334,8 +334,14 @@ def process_content_type(content_type):
     return output
 
 
-@app.route('/api/generate-design', methods=['POST'])
+@app.route('/api/generate-design', methods=['POST', 'OPTIONS'])
 def generate_design():
+
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        return jsonify({'status': 'OK'}), 200
+    
+    
     data = request.get_json()
 
     prompt = data.get('prompt')
