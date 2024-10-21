@@ -14,8 +14,17 @@ genai.configure(api_key=os.getenv("API_KEY"))
 
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend-backend communication
-# Load the NLP model
+# CORS(app)  # Enable CORS for frontend-backend communication
+
+# Determine if it's a production environment
+is_production = os.getenv('FLASK_ENV') == 'production'
+
+if is_production:
+    # Restrict CORS in production
+    cors = CORS(app, resources={r"/*": {"origins": ["https://techsurf-project.onrender.com"]}})
+else:
+    # Allow CORS for all origins during development
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Initialize the Database instance
 db = Database()
