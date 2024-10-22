@@ -21,7 +21,7 @@ const ContentTypeCard = ({ contentType }) => {
   const handleCreateClick = async () => {
     try {
       // Access the stored stack API key from localStorage
-      let storedStackApiKey = localStorage.getItem('selectedStack');
+      const storedStackApiKey = localStorage.getItem('selectedStack');
       // Check if user is authenticated
       if (!isUserAuthenticated()) {
         setMessage('🔒Login required');
