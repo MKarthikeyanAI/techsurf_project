@@ -1,7 +1,7 @@
 // src/App.js
 
 // import React from 'react';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import ButtonComponent from './components/ButtonComponent';
 // import Button from './components/Button';
 // import ComponentGenerator from './components/ComponentGenerator';
@@ -16,12 +16,34 @@ import "./App.css"; // For overall styling
 
 const App = () => {
   console.log("App.js Running");
-  const [designData, setDesignData] = useState({ svgContent: "", htmlCssCode: "",prompt:"",design_type:"" });
-  const [allPageData, setAllPageData] = useState({ allPageSVGs: [], allPageHTMLCSS: [], prompt: [] ,design_type:""});
-  const [contentTypes, setContentTypes] = useState([]); // State to store content types
+  // const [designData, setDesignData] = useState({ svgContent: "", htmlCssCode: "",prompt:"",design_type:"" });
+  // const [allPageData, setAllPageData] = useState({ allPageSVGs: [], allPageHTMLCSS: [], prompt: [] ,design_type:""});
+  // const [contentTypes, setContentTypes] = useState([]); // State to store content types
 
-  // State for the design type (Page or Website)
+  // Initialize state with values from localStorage if available
+  const [designData, setDesignData] = useState(() => {
+    const storedData = localStorage.getItem('designData');
+    return storedData ? JSON.parse(storedData) : { svgContent: "", htmlCssCode: "", prompt: "", design_type: "" };
+  });
+
+  const [allPageData, setAllPageData] = useState(() => {
+    const storedPageData = localStorage.getItem('allPageData');
+    return storedPageData ? JSON.parse(storedPageData) : { allPageSVGs: [], allPageHTMLCSS: [], prompt: [], design_type: "" };
+  });
+
+  const [contentTypes, setContentTypes] = useState(() => {
+    const storedContentTypes = localStorage.getItem('contentTypes');
+    return storedContentTypes ? JSON.parse(storedContentTypes) : [];
+  });
+
   const [designType, setDesignType] = useState("Website"); // Default to "Website"
+
+  useEffect(() => {
+    // Store data in localStorage whenever it changes
+    localStorage.setItem('designData', JSON.stringify(designData));
+    localStorage.setItem('allPageData', JSON.stringify(allPageData));
+    localStorage.setItem('contentTypes', JSON.stringify(contentTypes));
+  }, [designData, allPageData, contentTypes]);
 
   console.log("App.js designType:", designType);
   console.log("App.js designData:", designData);
@@ -33,6 +55,7 @@ const App = () => {
     setContentTypes([]); // Clear the content types
     setDesignData({ svgContent: "", htmlCssCode: "", prompt: "", design_type: "" }); // Reset designData
     setAllPageData({ allPageSVGs: [], allPageHTMLCSS: [], prompt: [], design_type: "" }); // Reset allPageData
+    localStorage.clear(); // Clear localStorage if you want to reset everythinglocalStorage.clear(); // Clear localStorage if you want to reset everything
   };
 
   console.log("App.js Running Finished");
