@@ -8,18 +8,28 @@ const RightSidebar = ({ contentTypes }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [regionUrl, setRegionUrl] = useState(''); // State to hold the selected region URL
+  const [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
 
   console.log(regionUrl);
 
 
   const handleLoginClick = () => {
-    if (isUserAuthenticated) {
-      // If already authenticated, log out
-      setIsModalOpen(true);
+    // if (isUserAuthenticated) {
+    //   // If already authenticated, log out
+    //   setIsModalOpen(true);
+
       
-    } else {
-      // If not authenticated, open the modal to login
+    // } else {
+    //   // If not authenticated, open the modal to login
+    //   logOut();
+    // }
+    if (isAuthenticated) {
+      // If already authenticated, log out the user
       logOut();
+      setIsAuthenticated(false); // Update the state to reflect the logout
+    } else {
+      // If not authenticated, open the modal to log in
+      setIsModalOpen(true);
     }
   };
 
@@ -46,7 +56,7 @@ const RightSidebar = ({ contentTypes }) => {
         onClick={handleLoginClick}
         className="login-button-top-right"
       >
-        {isUserAuthenticated() ? 'Logout' : 'Login'}
+        {isAuthenticated ? 'Logout' : 'Login'} {/* Display appropriate label */}
       </button>
 
 
