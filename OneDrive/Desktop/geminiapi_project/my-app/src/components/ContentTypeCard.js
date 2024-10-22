@@ -17,12 +17,19 @@ const ContentTypeCard = ({ contentType }) => {
 
   const handleCreateClick = async () => {
     try {
+
       // Check if user is authenticated
       if (!isUserAuthenticated()) {
-        // If not authenticated, open the region modal
-        setIsModalOpen(true);
+        // Show message prompting the user to login
+        setMessage('⚠️Please Log in');
         return; // Stop the function execution here
       }
+      // Check if user is authenticated
+      // if (!isUserAuthenticated()) {
+      //   // If not authenticated, open the region modal
+      //   setIsModalOpen(true);
+      //   return; // Stop the function execution here
+      // }
 
       // If authenticated, proceed to login and get the auth token
       // const authToken = await loginToContentstack();
@@ -86,4 +93,3 @@ const ContentTypeCard = ({ contentType }) => {
 };
 
 export default ContentTypeCard;
-
