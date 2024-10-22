@@ -16,18 +16,18 @@ const ContentTypeCard = ({ contentType }) => {
   const [isStackModalOpen, setIsStackModalOpen] = useState(false);
   const [organizationId, setOrganizationId] = useState('');
 
-  // Access the stored stack API key from localStorage
-  const storedStackApiKey = localStorage.getItem('selectedStack');
+  
 
   const handleCreateClick = async () => {
     try {
-
+      // Access the stored stack API key from localStorage
+      let storedStackApiKey = localStorage.getItem('selectedStack');
       // Check if user is authenticated
       if (!isUserAuthenticated()) {
         setMessage('🔒Login required');
         return; // Stop the function execution here
       }
-      
+      console.log("Using stored stack API KEY: ",storedStackApiKey)
       if (storedStackApiKey) {
         const accessToken = getAccessToken(); // Retrieve access token from localStorage
         console.log('Using stored stack API key:', storedStackApiKey);
