@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './ContentTypeCard.css';
-// import createContentType from './ContentTypeService'; // Ensure the correct import path
-// import loginToContentstack from './loginToContentstack'; // Ensure the correct import path
-import { isUserAuthenticated, redirectToContentstackOAuth } from '../auth/authHelpers.js'; // Import auth helpers
+
+import { isUserAuthenticated, redirectToContentstackOAuth, getAccessToken} from '../auth/authHelpers.js'; // Import auth helpers
 import RegionModal from './RegionModal.js'; // Import the RegionModal component
+import StackModal from './StackModal.js';
+import { fetchOrganizations } from './ContentstackService'; // Service for fetching organizations
 import { PulseLoader } from "react-spinners"; // Import the spinner component
+import createContentType from './createContentType.js'; // Import the function to create 
 
 const ContentTypeCard = ({ contentType }) => {
   const [message, setMessage] = useState('');
@@ -12,6 +14,8 @@ const ContentTypeCard = ({ contentType }) => {
   const [loading, setLoading] = useState(false); // New state variable for loading status
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [regionUrl, setRegionUrl] = useState(''); // State to hold the selected region URL
+  const [isStackModalOpen, setIsStackModalOpen] = useState(false);
+  const [organizationId, setOrganizationId] = useState('');
 
   console.log(regionUrl);
 
@@ -20,8 +24,7 @@ const ContentTypeCard = ({ contentType }) => {
 
       // Check if user is authenticated
       if (!isUserAuthenticated()) {
-        // Show message prompting the user to login
-        setMessage('⚠️Please Log in');
+        setMessage('🔒Login required');
         return; // Stop the function execution here
       }
       // Check if user is authenticated
@@ -31,16 +34,26 @@ const ContentTypeCard = ({ contentType }) => {
       //   return; // Stop the function execution here
       // }
 
-      // If authenticated, proceed to login and get the auth token
-      // const authToken = await loginToContentstack();
-      // console.log("AuthToken in ContentTypeCard.js: ", authToken);
+      const accessToken = getAccessToken();
+      // const accessToken = "38fff32f4b15dac522f5fe2d2f808fca"; // Hardcoded token
+      console.log("Access token-- ", accessToken); 
+      const organizations = await fetchOrganizations(accessToken);
+      console.log("Organizations: ", organizations);
 
-      // // Create content type
-      // const message = await createContentType(authToken, contentType); // Pass the contentType to create
-      // console.log("Message: ", message);
-      // setMessage(Successfully created content type: ${contentType.title});
+      if (organizations.length === 0) {
+        setMessage('No organizations found.');
+        return;
+      }
 
+      // Automatically select the first organization for this example
+      setOrganizationId(organizations[1].uid);
+      console.log("Organization ID: ", organizations[1].uid);
+      setIsStackModalOpen(true); // Open stack modal to select the stack
+
+
+      
       setMessage(`Successfully Created ${contentType.title}`);
+      
       setIsSuccess(true); // Set success state to true
 
       // Clear the message after 3 seconds
@@ -66,6 +79,24 @@ const ContentTypeCard = ({ contentType }) => {
     setIsModalOpen(false); // Close the modal after selection
   };
 
+  const handleStackSubmit = async (stackApiKey) => {
+    // Store the selected stack in localStorage
+    localStorage.setItem('selectedStack', stackApiKey);
+    console.log('Selected Stack API Key:', stackApiKey);
+
+    setIsStackModalOpen(false);
+
+    const accessToken = getAccessToken();
+    
+    try {
+      await createContentType(stackApiKey, accessToken, regionUrl, contentType); // Call content type creation function
+      setMessage('Content type created successfully.');
+    } catch (error) {
+      setMessage('Error creating content type.');
+      console.error(error);
+    }
+  };
+  
   return (
     <div className={`content-type-card ${isSuccess ? 'success' : ''}`}> {/* Conditional class for success */}
       <h3 className="content-type-title">{contentType.title}</h3>
@@ -87,6 +118,13 @@ const ContentTypeCard = ({ contentType }) => {
       )}
       {isModalOpen && (
         <RegionModal onClose={() => setIsModalOpen(false)} onSubmit={handleRegionSubmit} />
+      )}
+      {isStackModalOpen && (
+        <StackModal
+          organizationId={organizationId}
+          onClose={() => setIsStackModalOpen(false)}
+          onSubmit={handleStackSubmit}
+        />
       )}
     </div>
   );
