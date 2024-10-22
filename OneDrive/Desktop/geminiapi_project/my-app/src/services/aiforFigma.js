@@ -173,7 +173,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
       console.log("HTML and CSS CODE ONLY: ",HtmlcodeandCsscode);
       
       // Return both SVG and HTML/CSS code
-      return { svgContent: cleanedResult, htmlCssCode: cleanedhtmlcssCode, prompt_input: prompt ,design_type : "Page", content_types: content_types};
+      return { svgContent: cleanedResult, htmlCssCode: cleanedhtmlcssCode, prompt: prompt ,design_type : "Page", content_types: content_types};
     } catch (error) {
       console.error("Error generating content:", error);
       throw error;
@@ -249,7 +249,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
 
       console.log("DesignType in AIFORFIGMA MULTIPLE PAGES: ",designType);
       // Return all SVG and HTML/CSS codes
-      return { allPageSVGs, allPageHTMLCSS, prompts ,design_type: "Website", content_types: content_types};
+      return { allPageSVGs, allPageHTMLCSS, prompt : prompts ,design_type: "Website", content_types: content_types};
       
     } catch (error) {
         console.error("Error generating content for website:", error);

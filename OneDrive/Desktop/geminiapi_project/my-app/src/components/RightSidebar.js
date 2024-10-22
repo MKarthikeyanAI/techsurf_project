@@ -3,6 +3,8 @@ import './RightSidebar.css';
 import ContentTypeCard from './ContentTypeCard';
 
 const RightSidebar = ({ contentTypes }) => {
+
+  console.log("ContentTypes in RightSideBar.js file: ",contentTypes)
   // Check if contentTypes is null, undefined, or an empty array
   if (!contentTypes || contentTypes.length === 0) {
     return (

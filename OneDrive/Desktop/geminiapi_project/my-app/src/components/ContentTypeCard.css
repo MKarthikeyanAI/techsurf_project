@@ -1,5 +1,5 @@
 .content-type-card {
-  background-color: #ffffff; /* White background for the card */
+  background-color: #f9f9f9; /* White background for the card */
   border: 1px solid #e0e0e0; /* Light gray border */
   border-radius: 8px; /* Rounded corners */
   padding: 15px; /* Inner spacing */
@@ -8,6 +8,16 @@
   display: flex; /* Flexbox layout */
   flex-direction: column; /* Stack elements vertically */
   align-items: flex-start; /* Align items to the start */
+}
+
+.content-type-card.success {
+  background-color: #61c553; /* Green background when successfully created */
+  color: white; /* Optional: change text color to ensure readability */
+}
+
+.content-type-card.success:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
 }
 
 .content-type-card:hover {
@@ -46,7 +56,7 @@
 }
 
 .create-button {
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: #007bff;
   color: white; /* Text color */
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */

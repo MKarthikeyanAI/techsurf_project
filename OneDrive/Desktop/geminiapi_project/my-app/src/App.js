@@ -16,17 +16,24 @@ import "./App.css"; // For overall styling
 
 const App = () => {
   console.log("App.js Running");
-  const [designData, setDesignData] = useState({ svgContent: "", htmlCssCode: "",prompt_input:"",design_type:"" });
-  const [allPageData, setAllPageData] = useState({ allPageSVGs: [], allPageHTMLCSS: [], prompts: {} ,design_type:""});
+  const [designData, setDesignData] = useState({ svgContent: "", htmlCssCode: "",prompt:"",design_type:"" });
+  const [allPageData, setAllPageData] = useState({ allPageSVGs: [], allPageHTMLCSS: [], prompt: [] ,design_type:""});
   const [contentTypes, setContentTypes] = useState([]); // State to store content types
 
   // State for the design type (Page or Website)
-  const [designType, setDesignType] = useState("Page"); // Default to "Page"
+  const [designType, setDesignType] = useState("Website"); // Default to "Website"
 
   console.log("App.js designType:", designType);
   console.log("App.js designData:", designData);
   console.log("App.js allPageData:", allPageData);
   console.log("App.js ContentType: ",contentTypes);
+  console.log("App.js allpage prompt: ",allPageData.prompt);
+  console.log("App.js designData prompt: ",designData.prompt);
+  const handleClearContentTypes = () => {
+    setContentTypes([]); // Clear the content types
+    setDesignData({ svgContent: "", htmlCssCode: "", prompt: "", design_type: "" }); // Reset designData
+    setAllPageData({ allPageSVGs: [], allPageHTMLCSS: [], prompt: [], design_type: "" }); // Reset allPageData
+  };
 
   console.log("App.js Running Finished");
   return (
@@ -42,20 +49,22 @@ const App = () => {
           /> */}
 <FigmaPromptForm
         onGenerate={designType === "Page" 
-          ? (svgContent, htmlCssCode, prompt_input,design_type,content_types) => {
+          ? (svgContent, htmlCssCode, prompt,design_type,content_types) => {
               // If designType is "Page"
-              setDesignData({ svgContent, htmlCssCode, prompt_input,design_type }) 
+              setDesignData({ svgContent, htmlCssCode, prompt,design_type }) 
               setContentTypes(content_types);
             } 
-          : (allPageSVGs, allPageHTMLCSS, prompts,design_type,content_types) => {
+          : (allPageSVGs, allPageHTMLCSS, prompt,design_type,content_types) => {
               // If designType is not "Page"
-              setAllPageData({ allPageSVGs, allPageHTMLCSS, prompts,design_type });
+              setAllPageData({ allPageSVGs, allPageHTMLCSS, prompt,design_type });
               // Add this line to set the content types after setting all page data
               setContentTypes(content_types);
             }
+          
         } 
         designType={designType} // Pass the current design type
         setDesignType={setDesignType} // Pass the setter function to update design type
+        onClear={handleClearContentTypes} // Pass the clear handler
         />
       <div className="generated-design-sections">
           {/* Render GeneratedDesign component with both svgContent and htmlCssCode */}
@@ -66,7 +75,7 @@ const App = () => {
             designType={designType} 
             htmlCssCode={designData.htmlCssCode} 
             design={designData.svgContent} 
-            prompt_input={designData.prompt_input}
+            prompt={designData.prompt}
           />
         )
       ) : (
@@ -76,7 +85,7 @@ const App = () => {
             designType={designType} // Pass the selected design type
             designPages={allPageData.allPageSVGs} 
             htmlCssCodePages={allPageData.allPageHTMLCSS} 
-            // design={designData.svgContent} 
+            prompt={allPageData.prompt} 
             // htmlCssCode={designData.htmlCssCode} 
             // prompt_input={designData.prompt_input}
           />

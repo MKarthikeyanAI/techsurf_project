@@ -10,7 +10,7 @@ import { PulseLoader } from 'react-spinners'; // Make sure to import the PulseLo
 import { FaRegFileAlt } from 'react-icons/fa'; // Use any icon that resembles Figma
 
 
-const GeneratedDesign = ({ design_type,designType, designPages, htmlCssCodePages, design, htmlCssCode, loading, prompt_input }) => {
+const GeneratedDesign = ({ design_type,designType, designPages, htmlCssCodePages, design, htmlCssCode, loading, prompt }) => {
   console.log("GenerateDesign File is Running: ");
   console.log("Design_type of MK: ",design_type);
   console.log("Design Type of MK: ",designType);
@@ -20,7 +20,7 @@ const GeneratedDesign = ({ design_type,designType, designPages, htmlCssCodePages
   console.log("GeneratedDesign.js: design of MK: ", design);
   console.log("GeneratedDesign.js: htmlCssCode of MK: ", htmlCssCode);
   console.log("GeneratedDesign.js: Loading of MK: ", designType);
-  console.log("GeneratedDesign.js: Prompt_input of MK: ", prompt_input);
+  console.log("GeneratedDesign.js: Prompt_input of MK: ", prompt);
   
 
   // State to toggle the HTML/CSS code card visibility
@@ -49,10 +49,10 @@ const GeneratedDesign = ({ design_type,designType, designPages, htmlCssCodePages
 
   // Function to handle component generation when "Web Components" button is clicked
 const handleGenerateComponents = async () => {
-  if (prompt_input) {
+  if (prompt) {
     setLoading(true); // Set loading to true when the function starts
     try {
-      const generatedComponents = await generate_components(prompt_input); // Await the promise to resolve
+      const generatedComponents = await generate_components(prompt); // Await the promise to resolve
       console.log("Generated components: ", generatedComponents);
       setComponents(generatedComponents); // Set the state with the generated components
       setCurrentComponentIndex(0); // Reset the index to the first component
@@ -67,7 +67,7 @@ const handleGenerateComponents = async () => {
 
     // Handle next page button click
    const handleNextPage = () => {
-      if (currentPageIndex < design.length - 1) {
+      if (currentPageIndex < designPages.length - 1) {
         setCurrentPageIndex(currentPageIndex + 1);
       }
    };
@@ -184,14 +184,14 @@ const handleGenerateComponents = async () => {
 
   return (
     <div className="generated-design-container">
-      <h3 className="generated-design-name">Generated Design:</h3>
+      <h3 className="generated-design-name">FIGMA DESIGN</h3>
       {design_type === "Page" ? (
         // Single Page Design Rendering
         <>
-          {design ? (
+          {designPages ? (
             <div
               className="design-output"
-              dangerouslySetInnerHTML={{ __html: design }}
+              dangerouslySetInnerHTML={{ __html: designPages }}
             />
           ) : (
             <p>No design generated yet.</p>
@@ -200,13 +200,8 @@ const handleGenerateComponents = async () => {
           <div className="button-group">
             <div className="button-container">
               {/* Figma Button */}
-              {!loading && design && (
-              <button className="figma-button" onClick={() => copyToClipboard(design, 'Figma file')}>
-                {/* <span className="icon" aria-hidden="true" style={{ marginRight: '8px' }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-clipboard" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h9V.5a.5.5 0 0 1 1 0V1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h1V.5a.5.5 0 0 1 .5-.5zM2 3v11h12V3H2zM4 4h8v1H4V4z"/>
-                  </svg>
-                </span> */}
+              {!loading && designPages && (
+              <button className="figma-button" onClick={() => copyToClipboard(designPages, 'Figma file')}>
                 <span className="icon" aria-hidden="true" style={{ marginRight: '8px' }}>
                     <FaRegFileAlt /> {/* Replace this with a relevant icon */}
                 </span>
@@ -215,7 +210,7 @@ const handleGenerateComponents = async () => {
             )}
 
               {/* Code Button */}
-              {!loading && htmlCssCode && (
+              {!loading && htmlCssCodePages && (
               <button className="code-button" onClick={toggleCodeModal}>
                 <span className="icon" aria-hidden="true" style={{ marginRight: "8px" }}>
                   <svg
@@ -255,11 +250,11 @@ const handleGenerateComponents = async () => {
       ) : (
         // Multi-Page Design Rendering
         <>
-          {design && design.length > 0 ? (
+          {designPages && designPages.length > 0 ? (
             <>
               <div
                 className="design-output"
-                dangerouslySetInnerHTML={{ __html: design[currentPageIndex].svg }}
+                dangerouslySetInnerHTML={{ __html: designPages[currentPageIndex].svg }}
               />
               {/* Pagination buttons for multiple pages */}
               <div className="pagination-buttons">
@@ -273,7 +268,7 @@ const handleGenerateComponents = async () => {
                 <button
                   className="next-button"
                   onClick={handleNextPage}
-                  disabled={currentPageIndex === design.length - 1}
+                  disabled={currentPageIndex === designPages.length - 1}
                 >
                   Next
                 </button>
@@ -285,7 +280,7 @@ const handleGenerateComponents = async () => {
                   {!loading && (
                     <button
                       className="figma-button"
-                      onClick={() => copyToClipboard(design[currentPageIndex].svg, 'Figma file')}
+                      onClick={() => copyToClipboard(designPages[currentPageIndex].svg, 'Figma file')}
                     >
                       <span className="icon" aria-hidden="true" style={{ marginRight: '8px' }}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-clipboard" viewBox="0 0 16 16">
@@ -297,7 +292,7 @@ const handleGenerateComponents = async () => {
                   )}
 
                   {/* Code Button */}
-                  {!loading && htmlCssCode && htmlCssCode.length > 0 && (
+                  {!loading && htmlCssCodePages && htmlCssCodePages.length > 0 && (
                     <button className="code-button" onClick={toggleCodeModal}>
                     {/* <span className="icon" aria-hidden="true" style={{ marginRight: "8px" }}>
                       <svg
@@ -408,9 +403,9 @@ const handleGenerateComponents = async () => {
                   className="copy-button"
                   onClick={() => {
                     if (designType === "Page") {
-                      copyToClipboard(htmlCssCode, "HTML/CSS Code");
+                      copyToClipboard(htmlCssCodePages, "HTML/CSS Code");
                     } else {
-                      copyToClipboard(htmlCssCode[currentPageIndex].svg, "HTML/CSS Code");
+                      copyToClipboard(htmlCssCodePages[currentPageIndex].svg, "HTML/CSS Code");
                     }
                   }}
                 >
@@ -426,9 +421,9 @@ const handleGenerateComponents = async () => {
             <div className="content">
               <pre className="code-block">
                 {design_type === "Page"
-                  ? htmlCssCode || "HTML/CSS code not available"
-                  : htmlCssCode
-                  ? htmlCssCode[currentPageIndex].htmlCss
+                  ? htmlCssCodePages || "HTML/CSS code not available"
+                  : htmlCssCodePages
+                  ? htmlCssCodePages[currentPageIndex].htmlCss
                   : "HTML/CSS code not available"}
               </pre>
             </div>

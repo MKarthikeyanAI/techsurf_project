@@ -101,6 +101,7 @@ class Database:
         collection = self.get_collection('content_types')  # Replace with your collection name
         try:
             document = collection.find_one({"website_type": website_type})
+            print("INMONGO: ",document)
             return document
         except Exception as e:
             print(f"Error fetching document: {e}")
@@ -136,15 +137,3 @@ class Database:
 
         print(f"No SVG code found for template name: {template_name} under page_type: {page_type}.")
         return None
-
-    # Function to fetch a document based on the website_type
-    def fetch_document_by_website_type(self, website_type):
-        # Access the 'content_types' collection
-        collection = self.get_collection('content_types')
-        try:
-            # Query for the document with the specified website_type
-            document = collection.find_one({"website_type": website_type})
-            return document
-        except Exception as e:
-            print(f"Error fetching document: {e}")
-            return None
