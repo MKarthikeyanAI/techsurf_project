@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './ContentTypeCard.css';
-
-import { isUserAuthenticated, redirectToContentstackOAuth, getAccessToken} from '../auth/authHelpers.js'; // Import auth helpers
-import RegionModal from './RegionModal.js'; // Import the RegionModal component
+import { isUserAuthenticated, redirectToContentstackOAuth, getAccessToken } from '../auth/authHelpers.js';
+import RegionModal from './RegionModal.js';
 import StackModal from './StackModal.js';
 import { fetchOrganizations } from './ContentstackService'; // Service for fetching organizations
 import { PulseLoader } from "react-spinners"; // Import the spinner component
@@ -17,7 +16,8 @@ const ContentTypeCard = ({ contentType }) => {
   const [isStackModalOpen, setIsStackModalOpen] = useState(false);
   const [organizationId, setOrganizationId] = useState('');
 
-  console.log(regionUrl);
+  // Access the stored stack API key from localStorage
+  const storedStackApiKey = localStorage.getItem('selectedStack');
 
   const handleCreateClick = async () => {
     try {
@@ -27,34 +27,33 @@ const ContentTypeCard = ({ contentType }) => {
         setMessage('🔒Login required');
         return; // Stop the function execution here
       }
-      // Check if user is authenticated
-      // if (!isUserAuthenticated()) {
-      //   // If not authenticated, open the region modal
-      //   setIsModalOpen(true);
-      //   return; // Stop the function execution here
-      // }
-
-      const accessToken = getAccessToken();
-      // const accessToken = "38fff32f4b15dac522f5fe2d2f808fca"; // Hardcoded token
-      console.log("Access token-- ", accessToken); 
-      const organizations = await fetchOrganizations(accessToken);
-      console.log("Organizations: ", organizations);
-
-      if (organizations.length === 0) {
-        setMessage('No organizations found.');
+      
+      if (storedStackApiKey) {
+        const accessToken = getAccessToken(); // Retrieve access token from localStorage
+        console.log('Using stored stack API key:', storedStackApiKey);
+        await createContentType(storedStackApiKey, accessToken); // Use stored stack API key to create content type
+        setMessage('Created Successfully.');
+      	setIsSuccess(true); // Set success state to true
         return;
+      } 
+      else {
+        // If no stack API key is stored, fetch organizations and prompt the user to select a stack
+        const accessToken = getAccessToken();
+        console.log("Access token-- ", accessToken); 
+        const organizations = await fetchOrganizations(accessToken);
+        console.log("Organizations: ", organizations);
+
+        if (organizations.length === 0) {
+          setMessage('No organizations found.');
+          return;
+        }
+
+        // Automatically select the first organization for this example
+        setOrganizationId(organizations[1].uid);
+        console.log("Organization ID: ", organizations[1].uid);
+        setIsStackModalOpen(true); // Open stack modal to select the stack
       }
-
-      // Automatically select the first organization for this example
-      setOrganizationId(organizations[1].uid);
-      console.log("Organization ID: ", organizations[1].uid);
-      setIsStackModalOpen(true); // Open stack modal to select the stack
-
-
       
-      setMessage(`Successfully Created ${contentType.title}`);
-      
-      setIsSuccess(true); // Set success state to true
 
       // Clear the message after 3 seconds
       setTimeout(() => {
@@ -80,7 +79,7 @@ const ContentTypeCard = ({ contentType }) => {
   };
 
   const handleStackSubmit = async (stackApiKey) => {
-    // Store the selected stack in localStorage
+    // Store the selected stack API key in localStorage
     localStorage.setItem('selectedStack', stackApiKey);
     console.log('Selected Stack API Key:', stackApiKey);
 
@@ -131,3 +130,4 @@ const ContentTypeCard = ({ contentType }) => {
 };
 
 export default ContentTypeCard;
+
