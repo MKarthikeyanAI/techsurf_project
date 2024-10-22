@@ -89,7 +89,9 @@ const ContentTypeCard = ({ contentType }) => {
     
     try {
       await createContentType(stackApiKey, accessToken, regionUrl, contentType); // Call content type creation function
-      setMessage('Content type created successfully.');
+      setMessage('Created Successfully.');
+      setIsSuccess(true); // Set success state to true
+      return;
     } catch (error) {
       setMessage('Error creating content type.');
       console.error(error);
