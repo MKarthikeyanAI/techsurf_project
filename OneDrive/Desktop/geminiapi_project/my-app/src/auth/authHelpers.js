@@ -6,7 +6,7 @@ export function redirectToContentstackOAuth(regionUrl) {
   const clientId = process.env.REACT_APP_CONTENTSTACK_CLIENT_ID; // Use REACT_APP_ prefix
   const redirectUri = process.env.REACT_APP_CONTENTSTACK_REDIRECT_URI; // Use REACT_APP_ prefix
   const appUID = "6714a525e15a8400128d6781";
-  const scope = 'cm.content-types.management:write cm.stacks.management:read organizations:read';
+  const scope = 'user:read';
   console.log(regionUrl);
 
   const authUrl = `${regionUrl}/apps/${appUID}/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
