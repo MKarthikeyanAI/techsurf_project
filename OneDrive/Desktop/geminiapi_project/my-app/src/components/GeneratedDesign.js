@@ -153,6 +153,7 @@ const handleGenerateComponents = async () => {
 
   // Copies the figma file to the clipboard:
   const copyToClipboard = (text, type) => {
+    console.log("COPIED TO CLIPBOARD HTML CSS: ",text);
     if (text) {
       navigator.clipboard.writeText(text)
         .then(() => {
@@ -402,10 +403,10 @@ const handleGenerateComponents = async () => {
                 <button
                   className="copy-button"
                   onClick={() => {
-                    if (designType === "Page") {
+                    if (design_type === "Page") {
                       copyToClipboard(htmlCssCodePages, "HTML/CSS Code");
                     } else {
-                      copyToClipboard(htmlCssCodePages[currentPageIndex].svg, "HTML/CSS Code");
+                      copyToClipboard(htmlCssCodePages[currentPageIndex].htmlCss, "HTML/CSS Code");
                     }
                   }}
                 >
