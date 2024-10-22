@@ -23,11 +23,13 @@ const createContentType = async (stackApiKey, accessToken, regionUrl, contentTyp
         "content_type": {
             "title": contentType.title,
             "uid": contentType.uid,
-            "schema": contentType.schema, // Use the passed schema
-            "options": contentType.options // Use the passed options
+            "schema": contentType.schema, 
+            "options": contentType.options 
         }
     };
     
+    console.log("CONTENT TYPE DOCS: ",contentTypeData);
+
     try {
         const response = await axios.post(url, contentTypeData, {
             headers: {
@@ -36,6 +38,7 @@ const createContentType = async (stackApiKey, accessToken, regionUrl, contentTyp
                 'Content-Type': 'application/json',
             },
         });
+        console.log("response: ",response);
         console.log('Content Type Created:', response.data);
     } catch (error) {
         console.error('Error creating content type:', error.response ? error.response.data : error.message);

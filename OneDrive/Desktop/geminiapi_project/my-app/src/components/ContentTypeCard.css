@@ -40,7 +40,7 @@
 
 /* Success message styling */
 .status-message.success {
-  background-color: #4caf50; /* Green background for success */
+  background-color: #f44336; /* Green background for success */
 }
 
 /* Error message styling */
