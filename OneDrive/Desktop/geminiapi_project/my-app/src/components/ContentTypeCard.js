@@ -31,7 +31,7 @@ const ContentTypeCard = ({ contentType }) => {
       if (storedStackApiKey) {
         const accessToken = getAccessToken(); // Retrieve access token from localStorage
         console.log('Using stored stack API key:', storedStackApiKey);
-        await createContentType(storedStackApiKey, accessToken); // Use stored stack API key to create content type
+        await createContentType(stackApiKey, accessToken, regionUrl, contentType); // Call content type creation function
         setMessage('Created Successfully.');
       	setIsSuccess(true); // Set success state to true
         return;
