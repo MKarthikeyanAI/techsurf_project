@@ -1,6 +1,7 @@
 // src/components/OAuthCallback.js
 import React, { useEffect } from 'react';
 import { exchangeAuthorizationCodeForToken } from './ExchangeAuthForAccess';
+import App from '../App';
 
 const OAuthCallback = () => {
   useEffect(() => {
@@ -19,7 +20,8 @@ const OAuthCallback = () => {
     }
   }, []);
 
-  return <div>Handling OAuth Redirect...</div>;
+  // Render the App component as a JSX element
+  return <App />;
 };
 
 export default OAuthCallback;
