@@ -10,7 +10,7 @@
 
 .design-output {
   width: 600px; /* Fixed width */
-  height: 400px; /* Fixed height */
+  height: auto; /* Fixed height */
   background-color: #000000; /* Background color for better visibility */
   color: #f1f1f1; /* Text color */
   padding: 5px;
