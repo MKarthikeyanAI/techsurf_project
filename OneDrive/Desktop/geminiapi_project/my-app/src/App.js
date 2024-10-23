@@ -45,12 +45,6 @@ const App = () => {
     localStorage.setItem('contentTypes', JSON.stringify(contentTypes));
   }, [designData, allPageData, contentTypes]);
 
-  console.log("App.js designType:", designType);
-  console.log("App.js designData:", designData);
-  console.log("App.js allPageData:", allPageData);
-  console.log("App.js ContentType: ",contentTypes);
-  console.log("App.js allpage prompt: ",allPageData.prompt);
-  console.log("App.js designData prompt: ",designData.prompt);
   const handleClearContentTypes = () => {
     setContentTypes([]); // Clear the content types
     setDesignData({ svgContent: "", htmlCssCode: "", prompt: "", design_type: "" }); // Reset designData

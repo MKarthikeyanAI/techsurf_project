@@ -12,15 +12,6 @@ import { FaRegFileAlt } from 'react-icons/fa'; // Use any icon that resembles Fi
 
 const GeneratedDesign = ({ design_type,designType, designPages, htmlCssCodePages, design, htmlCssCode, loading, prompt }) => {
   console.log("GenerateDesign File is Running: ");
-  console.log("Design_type of MK: ",design_type);
-  console.log("Design Type of MK: ",designType);
-  console.log("designPages: ",designPages);
-  console.log("htmlCssCodePages: ",htmlCssCodePages);
-  console.log("================================================");
-  console.log("GeneratedDesign.js: design of MK: ", design);
-  console.log("GeneratedDesign.js: htmlCssCode of MK: ", htmlCssCode);
-  console.log("GeneratedDesign.js: Loading of MK: ", designType);
-  console.log("GeneratedDesign.js: Prompt_input of MK: ", prompt);
   
 
   // State to toggle the HTML/CSS code card visibility
@@ -53,7 +44,6 @@ const handleGenerateComponents = async () => {
     setLoading(true); // Set loading to true when the function starts
     try {
       const generatedComponents = await generate_components(prompt); // Await the promise to resolve
-      console.log("Generated components: ", generatedComponents);
       setComponents(generatedComponents); // Set the state with the generated components
       setCurrentComponentIndex(0); // Reset the index to the first component
       setShowComponentModal(true); // Show the components modal
@@ -153,11 +143,9 @@ const handleGenerateComponents = async () => {
 
   // Copies the figma file to the clipboard:
   const copyToClipboard = (text, type) => {
-    console.log("COPIED TO CLIPBOARD HTML CSS: ",text);
     if (text) {
       navigator.clipboard.writeText(text)
         .then(() => {
-          console.log("typemk: ",type);
           if (type === "React code") {
             setCopyButtonTextcom("Copied!"); // Change button text to "Copied!"
             setTimeout(() => setCopyButtonTextcom("Copy Code"), 2000); // Reset after 2 seconds
@@ -182,6 +170,7 @@ const handleGenerateComponents = async () => {
     }
   };
 
+  console.log("GeneratedDesign.js File running is finished");
 
   return (
     <div className="generated-design-container">
