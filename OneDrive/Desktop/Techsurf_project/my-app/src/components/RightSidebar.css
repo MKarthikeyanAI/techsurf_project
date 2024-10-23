@@ -1,0 +1,47 @@
+.right-sidebar {
+  background-color: #f9f9f9; /* Light background color */
+  border-left: 1px solid #e0e0e0; /* Subtle border for separation */
+  padding: 20px; /* Spacing around the content */
+  width: 450px; /* Set a fixed width for the sidebar (increase as needed) */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.right-sidebar h2 {
+  color: #333; /* Darker text color for the heading */
+  font-size: 24px; /* Font size for heading */
+  margin-bottom: 15px; /* Spacing below the heading */
+  font-family: 'Arial', sans-serif; /* Modern font family */
+}
+
+.content-types-list {
+  display: flex;
+  flex-direction: column; /* Stack the cards vertically */
+  gap: 10px; /* Space between cards */
+}
+
+.content-type-card {
+  background-color: #ffffff; /* Card background color */
+  border: 1px solid #e0e0e0; /* Light border around the card */
+  border-radius: 8px; /* Rounded corners */
+  width: 195px;
+  padding: 10px; /* Inner spacing */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effects */
+}
+
+.content-type-card:hover {
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+.content-type-title {
+  font-size: 14px; /* Font size for content type title */
+  color: #555; /* Color for the content type title */
+  margin: 0; /* Remove default margin */
+}
+
+.content-type-description {
+  font-size: 14px; /* Font size for description */
+  color: #777; /* Lighter color for description */
+}
