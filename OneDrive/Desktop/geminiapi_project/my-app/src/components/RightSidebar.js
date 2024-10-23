@@ -39,7 +39,7 @@ const RightSidebar = ({ contentTypes }) => {
     setIsModalOpen(false); // Close the modal after selection
   };
 
-  // console.log("ContentTypes in RightSideBar.js file: ",contentTypes)
+  console.log("ContentTypes in RightSideBar.js file: ",contentTypes)
   // Check if contentTypes is null, undefined, or an empty array
   if (!contentTypes || contentTypes.length === 0) {
     return (

@@ -36,10 +36,10 @@ const FigmaPromptForm = ({ onGenerate,onClear }) => {
     setError(""); // Reset error state
     try {
       const result = await generateFigmaDesignPrompt(prompt, designType);
-      // console.log("FigmaPromptForm js result file: ", result);
-      // console.log("FigmaPromptForm js designType:  ", designType);
-      // console.log("result design type: ", result.design_type);
-      // console.log("FIgmaPromptForm js prompt: ",result.prompt);
+      console.log("FigmaPromptForm js result file: ", result);
+      console.log("FigmaPromptForm js designType:  ", designType);
+      console.log("result design type: ", result.design_type);
+      console.log("FIgmaPromptForm js prompt: ",result.prompt);
       if (result.design_type === "Page" && result.svgContent && result.htmlCssCode) {
         console.log("Page OnGenerate is running");
         onGenerate(result.svgContent, result.htmlCssCode, result.prompt, result.design_type,result.content_types); // Pass both contents
@@ -48,7 +48,7 @@ const FigmaPromptForm = ({ onGenerate,onClear }) => {
         onGenerate(result.allPageSVGs, result.allPageHTMLCSS, result.prompt, result.design_type,result.content_types); // Pass both contents
       }
     } catch (error) {
-      // console.error("Error generating design:", error);
+      console.error("Error generating design:", error);
       setError("Failed to generate the design. Please try again."); // Display a user-friendly error message
     } finally {
       setLoading(false); // Reset loading state after receiving response
@@ -71,7 +71,6 @@ const FigmaPromptForm = ({ onGenerate,onClear }) => {
     onClear(); // Notify the parent component to clear content types
   };
 
-  console.log("FigmaPromptForm.js file running is finished");
 
   return (
     <div className="header">
