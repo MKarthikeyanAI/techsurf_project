@@ -510,7 +510,7 @@ def get_svg_code():
 
 if __name__ == '__main__':
     # Use Gunicorn in production
-    app.run(host='0.0.0.0', port=8000, debug=False)  # Disable debug mode for production
-    # app.run(debug=True)
+    # app.run(host='0.0.0.0', port=8000, debug=False)  # Disable debug mode for production
+    app.run(debug=True)
 
     
