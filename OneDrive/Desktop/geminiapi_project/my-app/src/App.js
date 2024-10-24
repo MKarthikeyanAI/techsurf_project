@@ -3,11 +3,6 @@
 // import React from 'react';
 import React, { useState, useEffect } from "react";
 // import ButtonComponent from './components/ButtonComponent';
-// import Button from './components/Button';
-// import ComponentGenerator from './components/ComponentGenerator';
-// import CreateContentType from './CreateContentType';
-// import CreateContentType from './contenttypecreation/CreateContentType';
-// import ContentTypes from './contenttypecreation/ContentTypes';
 //figma
 import FigmaPromptForm from "./components/FigmaPromptForm";
 import GeneratedDesign from "./components/GeneratedDesign";
@@ -45,12 +40,12 @@ const App = () => {
     localStorage.setItem('contentTypes', JSON.stringify(contentTypes));
   }, [designData, allPageData, contentTypes]);
 
-  console.log("App.js designType:", designType);
-  console.log("App.js designData:", designData);
-  console.log("App.js allPageData:", allPageData);
-  console.log("App.js ContentType: ",contentTypes);
-  console.log("App.js allpage prompt: ",allPageData.prompt);
-  console.log("App.js designData prompt: ",designData.prompt);
+  // console.log("App.js designType:", designType);
+  // console.log("App.js designData:", designData);
+  // console.log("App.js allPageData:", allPageData);
+  // console.log("App.js ContentType: ",contentTypes);
+  // console.log("App.js allpage prompt: ",allPageData.prompt);
+  // console.log("App.js designData prompt: ",designData.prompt);
   const handleClearContentTypes = () => {
     setContentTypes([]); // Clear the content types
     setDesignData({ svgContent: "", htmlCssCode: "", prompt: "", design_type: "" }); // Reset designData
@@ -122,10 +117,6 @@ const App = () => {
         </div>
         
       </div>
-      
-      {/* <ComponentGenerator /> */}
-      {/* <CreateContentType />
-      <ContentTypes /> */}
       
     </div>
   );

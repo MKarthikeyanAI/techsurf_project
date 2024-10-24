@@ -17,7 +17,7 @@ const ContentTypeCard = ({ contentType }) => {
   const [organizationId, setOrganizationId] = useState('');
 
   
-
+  console.log("ContentTypeCard.js is Running...")
   const handleCreateClick = async () => {
     try {
       // Access the stored stack API key from localStorage
@@ -27,10 +27,10 @@ const ContentTypeCard = ({ contentType }) => {
         setMessage('🔒Login required');
         return; // Stop the function execution here
       }
-      console.log("Using stored stack API KEY: ",storedStackApiKey)
+      // console.log("Using stored stack API KEY: ",storedStackApiKey)
       if (storedStackApiKey) {
         const accessToken = getAccessToken(); // Retrieve access token from localStorage
-        console.log('Using stored stack API key:', storedStackApiKey);
+        // console.log('Using stored stack API key:', storedStackApiKey);
         await createContentType(storedStackApiKey, accessToken, regionUrl, contentType); // Call content type creation function
         setMessage('Created Successfully.');
       	setIsSuccess(true); // Set success state to true
@@ -39,9 +39,9 @@ const ContentTypeCard = ({ contentType }) => {
       else {
         // If no stack API key is stored, fetch organizations and prompt the user to select a stack
         const accessToken = getAccessToken();
-        console.log("Access token-- ", accessToken); 
+        // console.log("Access token-- ", accessToken); 
         const organizations = await fetchOrganizations(accessToken);
-        console.log("Organizations: ", organizations);
+        // console.log("Organizations: ", organizations);
 
         if (organizations.length === 0) {
           setMessage('No organizations found.');
@@ -50,7 +50,7 @@ const ContentTypeCard = ({ contentType }) => {
 
         // Automatically select the first organization for this example
         setOrganizationId(organizations[1].uid);
-        console.log("Organization ID: ", organizations[1].uid);
+        // console.log("Organization ID: ", organizations[1].uid);
         setIsStackModalOpen(true); // Open stack modal to select the stack
       }
       
@@ -81,7 +81,7 @@ const ContentTypeCard = ({ contentType }) => {
   const handleStackSubmit = async (stackApiKey) => {
     // Store the selected stack API key in localStorage
     localStorage.setItem('selectedStack', stackApiKey);
-    console.log('Selected Stack API Key:', stackApiKey);
+    // console.log('Selected Stack API Key:', stackApiKey);
 
     setIsStackModalOpen(false);
 

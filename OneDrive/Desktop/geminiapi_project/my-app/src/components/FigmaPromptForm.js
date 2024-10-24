@@ -36,10 +36,10 @@ const FigmaPromptForm = ({ onGenerate,onClear }) => {
     setError(""); // Reset error state
     try {
       const result = await generateFigmaDesignPrompt(prompt, designType);
-      console.log("FigmaPromptForm js result file: ", result);
-      console.log("FigmaPromptForm js designType:  ", designType);
-      console.log("result design type: ", result.design_type);
-      console.log("FIgmaPromptForm js prompt: ",result.prompt);
+      // console.log("FigmaPromptForm js result file: ", result);
+      // console.log("FigmaPromptForm js designType:  ", designType);
+      // console.log("result design type: ", result.design_type);
+      // console.log("FIgmaPromptForm js prompt: ",result.prompt);
       if (result.design_type === "Page" && result.svgContent && result.htmlCssCode) {
         console.log("Page OnGenerate is running");
         onGenerate(result.svgContent, result.htmlCssCode, result.prompt, result.design_type,result.content_types); // Pass both contents

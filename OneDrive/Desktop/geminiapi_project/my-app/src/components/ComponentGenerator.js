@@ -1,3 +1,4 @@
+// For testing purposes...
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const generate_components = async (prompt_input) => {

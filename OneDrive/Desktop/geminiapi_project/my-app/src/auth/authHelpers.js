@@ -1,5 +1,5 @@
 import axios from 'axios';
-const tokenUrl = 'https://eu-app.contentstack.com/apps-api/apps/token';
+//const tokenUrl = 'https://eu-app.contentstack.com/apps-api/apps/token';
 
 // Redirect to Contentstack OAuth login page
 export function redirectToContentstackOAuth(regionUrl) {
@@ -46,7 +46,7 @@ export function getRefreshToken() {
 }
 
 // Refresh the access token using the refresh token
-export async function refreshToken() {
+export async function refreshToken(regionUrl) {
   const refreshToken = localStorage.getItem('contentstackRefreshToken');
   if (!refreshToken) {
     throw new Error('No refresh token available');
@@ -56,10 +56,12 @@ export async function refreshToken() {
   params.append('grant_type', 'refresh_token');
   params.append('client_id', 'u7ZmYJM3vkCrEQru');
   params.append('client_secret', 'PbKOTCy5MsgM7Jdm1r1uqgZLu415HFcb');
-  params.append('redirect_uri', 'https://www.google.com/');
+  params.append('redirect_uri', 'https://techsurf-project.onrender.com/oaut/callback/');
   params.append('refresh_token', refreshToken);
 
   try {
+    const tokenUrl = `${regionUrl}/apps-api/apps/token`;
+    //console.log("token url ",tokenUrl);
     const response = await axios.post(tokenUrl, params, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

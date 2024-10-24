@@ -22,7 +22,7 @@ const RegionModal = ({ onClose }) => {
     event.preventDefault();
     if (selectedRegion) {
       // Call the redirect function with the selected region
-      console.log("selected region url ",selectedRegion);
+      // console.log("selected region url ",selectedRegion);
       redirectToContentstackOAuth(selectedRegion); 
     }
   };
