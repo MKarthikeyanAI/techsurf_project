@@ -192,7 +192,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
 
           console.log(`Processing page: ${pageName}`);
 
-          let detailedPrompt = `.Create me a ${pageName} like this.Provide the SVG code and change the texts according to this ${prompt}. This is for the purpose of Figma Design,it should follow the Figma principles like grouping. Example SVG: ${svgCode}.Provide only the SVG code.`;
+          let detailedPrompt = `.Create me a ${pageName} like this.Provide the SVG code and change the texts and color theme according to this ${prompt}. This is for the purpose of Figma Design,it should follow the Figma principles like grouping. Example SVG: ${svgCode}.Provide only the SVG code.`;
 
           // Generate content using the detailed prompt for each page
           const responsee = await model.generateContent(detailedPrompt);
