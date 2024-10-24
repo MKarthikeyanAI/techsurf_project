@@ -34,6 +34,11 @@ const ContentTypeCard = ({ contentType }) => {
         await createContentType(storedStackApiKey, accessToken, regionUrl, contentType); // Call content type creation function
         setMessage('Created Successfully.');
       	setIsSuccess(true); // Set success state to true
+        // Clear the message after 3 seconds
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        
         return;
       } 
       else {
