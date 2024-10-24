@@ -182,7 +182,7 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
   else{    
     // Step 1: Call the backend to get SVG codes for multiple pages
     const websitedata = await fetchSvgFromBackendForWebsite(prompt);
-    console.log("Website Data: ", websitedata);
+    // console.log("Website Data: ", websitedata);
     
     const allPageSVGs = []; // Array to store SVG codes for all pages
     const allPageHTMLCSS = []; // Array to store HTML/CSS codes for all pages
@@ -243,9 +243,9 @@ export const generateFigmaDesignPrompt = async (prompt,designType) => {
           prompts[pageName] = prompt; // Store prompt for each page
           
       }
-      console.log("All Pages: ",allPageSVGs);
-      console.log("All HTML AND CSS: ",allPageHTMLCSS);
-      console.log("All Prompts: ",prompts)
+      // console.log("All Pages: ",allPageSVGs);
+      // console.log("All HTML AND CSS: ",allPageHTMLCSS);
+      // console.log("All Prompts: ",prompts)
 
       console.log("DesignType in AIFORFIGMA MULTIPLE PAGES: ",designType);
       // Return all SVG and HTML/CSS codes
@@ -330,7 +330,7 @@ try {
   });
   
   const data = await response.json();
-  console.log("Fetched the Matched content type: ",data);
+  // console.log("Fetched the Matched content type: ",data);
 
   if (!response.ok) {
     // console.log("fetched the matched content tye: ",data);
