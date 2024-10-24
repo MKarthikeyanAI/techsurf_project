@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './RightSidebar.css';
 import ContentTypeCard from './ContentTypeCard';
 import { isUserAuthenticated, redirectToContentstackOAuth, logOut } from '../auth/authHelpers'; // Import authentication helpers
 import RegionModal from './RegionModal'; // Import modal for login
 
-const RightSidebar = ({ contentTypes }) => {
+const RightSidebar = ({ contentTypes, isAuthenticated, setIsAuthenticated }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
   const [regionUrl, setRegionUrl] = useState(''); // State to hold the selected region URL
-  const [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
+  // const [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
+
+  useEffect(() => {
+    // Re-check authentication on mount
+    setIsAuthenticated(isUserAuthenticated());
+  }, [setIsAuthenticated]);
+
 
   console.log(regionUrl);
 

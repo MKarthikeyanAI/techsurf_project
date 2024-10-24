@@ -8,6 +8,7 @@ import FigmaPromptForm from "./components/FigmaPromptForm";
 import GeneratedDesign from "./components/GeneratedDesign";
 import RightSidebar from './components/RightSidebar'; // Import the Sidebar Component
 import "./App.css"; // For overall styling
+import { isUserAuthenticated } from './auth/authHelpers'; // Import the helper to check auth status
 
 const App = () => {
   console.log("App.js Running");
@@ -32,6 +33,9 @@ const App = () => {
   });
 
   const [designType, setDesignType] = useState("Website"); // Default to "Website"
+
+  // New state to track authentication
+  const [isAuthenticated, setIsAuthenticated] = useState(isUserAuthenticated());
 
   useEffect(() => {
     // Store data in localStorage whenever it changes
@@ -113,7 +117,11 @@ const App = () => {
 
       </div>
       {/* Add the RightSidebar Component and pass the contentTypes */}
-      <RightSidebar contentTypes={contentTypes} />
+      <RightSidebar 
+      contentTypes={contentTypes}
+      isAuthenticated={isAuthenticated}
+      setIsAuthenticated={setIsAuthenticated}
+      />
         </div>
         
       </div>
